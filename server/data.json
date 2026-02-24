@@ -1,0 +1,53 @@
+{
+  "students": [
+    {
+      "id": 1,
+      "name": "Alice Sharma",
+      "rollNumber": "2021001",
+      "email": "2021001@mmmut.ac.in",
+      "year": "3rd",
+      "githubUsername": "alice-dev",
+      "password": "password123"
+    },
+    {
+      "id": 2,
+      "name": "Bhavesh Kumar",
+      "rollNumber": "2021002",
+      "email": "2021002@mmmut.ac.in",
+      "year": "2nd",
+      "githubUsername": "bhavesh-k",
+      "password": "password123"
+    },
+    {
+      "id": 3,
+      "name": "Charu Singh",
+      "rollNumber": "2021003",
+      "email": "2021003@mmmut.ac.in",
+      "year": "1st",
+      "githubUsername": "charu-codes",
+      "password": "password123"
+    },
+    {
+      "id": 4,
+      "name": "ahkjds ahjdbbahj",
+      "rollNumber": "28193821989",
+      "email": "28193821989@mmmut.ac.in",
+      "year": "1st",
+      "githubUsername": "dhiasidak",
+      "password": "AYush23"
+    }
+  ],
+  "publishLeaderboard": true,
+  "quizScores": {
+    "2021001": 48,
+    "2021002": 70,
+    "2021003": 40,
+    "28193821989": 0
+  },
+  "prCounts": {
+    "2021001": 6,
+    "2021002": 4,
+    "2021003": 2,
+    "28193821989": 0
+  }
+}

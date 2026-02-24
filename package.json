@@ -1,0 +1,19 @@
+{
+  "name": "dash",
+  "version": "1.0.0",
+  "description": "GDG MMMUT FOSS Contribution Month dashboard",
+  "main": "index.js",
+  "scripts": {
+    "dev:server": "node server/index.js",
+    "dev:client": "npm run dev --prefix client",
+    "build": "npm run build --prefix client",
+    "start": "node server/index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^5.2.1"
+  }
+}
