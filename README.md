@@ -1,4 +1,3 @@
-# gittu_dashboard
 
 GDG MMMUT FOSS Contribution Month dashboard.
 
