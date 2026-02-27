@@ -4,18 +4,12 @@ import { ContributionGrid } from './ContributionGrid';
 
 type Role = 'student' | 'admin';
 
-interface QuizRow {
+interface LeaderboardRow {
   rank: number;
   name: string;
   rollNumber: string;
   githubUsername: string;
-  score: number;
-}
-
-interface PrRow {
-  rank: number;
-  githubUsername: string;
-  rollNumber: string;
+  quizScore: number;
   prCount: number;
   status: string;
   qualified: boolean;
@@ -23,8 +17,7 @@ interface PrRow {
 
 interface LeaderboardResponse {
   published: boolean;
-  quizLeaderboard: QuizRow[];
-  prLeaderboard: PrRow[];
+  leaderboard: LeaderboardRow[];
 }
 
 interface Props {
@@ -44,6 +37,7 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
       setData(adminData);
       return;
     }
+
     if (role === 'student') {
       setLoading(true);
       fetch(`${API_BASE}/api/leaderboard`)
@@ -54,6 +48,8 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
   }, [role, adminData]);
 
   const source = adminData || data;
+
+  const rows = source?.leaderboard ?? [];
 
   return (
     <section className="card card-leaderboard">
@@ -94,6 +90,8 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
 
       {!loading && source && source.published && (
         <div className="card-body">
+
+          {/* QUIZ TAB */}
           {activeTab === 'quiz' && (
             <div className="table-wrapper">
               <table className="gh-table">
@@ -107,7 +105,7 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {source.quizLeaderboard.map((row) => (
+                  {rows.map((row) => (
                     <tr key={row.rank}>
                       <td>{row.rank}</td>
                       <td>{row.name}</td>
@@ -122,7 +120,7 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
                           @{row.githubUsername}
                         </a>
                       </td>
-                      <td>{row.score}</td>
+                      <td>{row.quizScore}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -130,6 +128,7 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
             </div>
           )}
 
+          {/* PR TAB */}
           {activeTab === 'pr' && (
             <div className="table-wrapper">
               <table className="gh-table">
@@ -144,7 +143,7 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {source.prLeaderboard.map((row) => (
+                  {rows.map((row) => (
                     <tr key={row.rank} className={row.qualified ? 'row-qualified' : ''}>
                       <td>{row.rank}</td>
                       <td>
@@ -166,7 +165,10 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
                       <td>{row.prCount}</td>
                       <td>{row.status}</td>
                       <td>
-                        <ContributionGrid seed={row.githubUsername} intensity={row.prCount} />
+                        <ContributionGrid
+                          seed={row.githubUsername}
+                          intensity={row.prCount}
+                        />
                       </td>
                     </tr>
                   ))}
@@ -174,9 +176,9 @@ export const LeaderboardSection: React.FC<Props> = ({ role, adminData }) => {
               </table>
             </div>
           )}
+
         </div>
       )}
     </section>
   );
 };
-
